@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Zone – Flicker</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #001d3d;
+  color: white;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #003566;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  color: #ffc300;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 Learning Zone</h1>
+
+<div class="container">
+
+  <div class="card">
+    <h2>⚛ React Workshop</h2>
+    <p>
+      React is a JavaScript library used to build fast and dynamic user interfaces.  
+      It uses components, props, and state to create reusable UI blocks.  
+      In real applications, React improves performance using Virtual DOM.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🕸 GraphQL</h2>
+    <p>
+      GraphQL is a query language for APIs.  
+      Instead of hitting multiple endpoints, the client requests exactly the data it needs.  
+      It includes Queries, Mutations, Subscriptions, Schema, and Resolvers.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🚀 Static Site Generators (Astro)</h2>
+    <p>
+      Astro generates extremely fast static websites using the “Islands Architecture”.  
+      It ships zero JavaScript by default, making pages load instantly.  
+      You can use React, Vue, or Svelte components inside Astro.
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flicker — Ticket</title>
+
+  <!-- font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --dark:#121212;
+      --cream:#f6efe6;
+      --accent:#003566;
+      --ticket-width:920px;
+      --side-width:110px;
+      --film-height:36px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:40px 18px;
+      font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background:#eee;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:28px;
+      color:#111;
+    }
+
+    /* ticket wrapper */
+    .ticket-wrap{
+      width:100%;
+      max-width:var(--ticket-width);
+      display:flex;
+      justify-content:center;
+    }
+
+    .ticket{
+      display:flex;
+      width:100%;
+      background:linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
+      border-radius:10px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+      overflow:visible;
+      align-items:stretch;
+    }
+
+    /* left / right dark strips */
+    .strip{
+      width:var(--side-width);
+      background:var(--dark);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      flex-shrink:0;
+    }
+
+    /* vertical text */
+    .strip.left{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);
+      font-weight:700;
+      letter-spacing:6px;
+      font-size:18px;
+    }
+
+    /* right strip holds barcode */
+    .strip.right{
+      justify-content:flex-end;
+      padding:16px 12px;
+    }
+    .strip.right .barcode{
+      width:72px;
+      height:160px;
+      object-fit:contain;
+      filter:contrast(1.1);
+      background:#fff;
+      padding:4px;
+      border-radius:2px;
+    }
+
+    /* center panel */
+    .center{
+      position:relative;
+      flex:1;
+      background:var(--cream);
+      padding:18px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* film-strip squares at top & bottom */
+    .film {
+      position:absolute;
+      left:calc(var(--side-width));
+      right:calc(var(--side-width));
+      height:var(--film-height);
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #111 0 38px,
+          transparent 38px 76px
+        );
+      z-index:3;
+      pointer-events:none;
+      box-shadow:0 6px 14px rgba(0,0,0,0.15);
+    }
+    .film.top{ top:8px; border-top-left-radius:6px; border-top-right-radius:6px; }
+    .film.bottom{
+      bottom:8px;
+      transform:rotate(180deg);
+      border-bottom-left-radius:6px; border-bottom-right-radius:6px;
+    }
+
+    /* inner ticket card (white content area) */
+    .inner{
+      width:calc(100% - 80px);
+      background:#fff;
+      border-radius:4px;
+      padding:28px 38px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      position:relative;
+      z-index:5;
+    }
+
+    /* vertical perforation lines on both sides */
+    .inner::before,
+    .inner::after{
+      content:"";
+      position:absolute;
+      top:8px;
+      bottom:8px;
+      width:18px;
+      background:
+        linear-gradient(180deg, transparent 0 6px, #e9dfd3 6px 10px, transparent 10px 16px);
+      left:-24px; /* left perforation */
+      border-radius:2px;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,0.02);
+    }
+    .inner::after{ left:auto; right:-24px; transform:none; }
+
+    /* logo and title */
+    .brand-row{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      justify-content:center;
+      margin-bottom:10px;
+    }
+    .brand-row img.logo{
+      width:86px;
+      height:86px;
+      object-fit:contain;
+      display:block;
+    }
+    h1.title{
+      font-size:28px;
+      margin:0;
+      font-weight:700;
+      letter-spacing:0.2px;
+      color:var(--dark);
+    }
+
+    /* info grid */
+    .info{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px 30px;
+      align-items:center;
+      font-size:16px;
+      color:#111;
+    }
+    .info .label{ font-weight:600; color:#111; margin-right:6px; }
+    .info .cell{ display:flex; gap:8px; align-items:center; }
+
+    /* seat/time row (full width) */
+    .info-full{
+      margin-top:12px;
+      display:flex;
+      justify-content:space-between;
+      font-size:16px;
+      gap:18px;
+    }
+
+    /* download button */
+    .download{
+      display:flex;
+      justify-content:center;
+      width:100%;
+    }
+    button#downloadBtn{
+      margin-top:12px;
+      padding:12px 26px;
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 12px rgba(0,0,0,0.15);
+    }
+    button#downloadBtn:hover{ transform:translateY(-2px); }
+
+    /* responsive */
+    @media (max-width:900px){
+      :root{ --ticket-width:720px; }
+      .inner{ padding:20px 22px; width:calc(100% - 40px); }
+      .brand-row img.logo{ width:64px; height:64px; }
+      h1.title{ font-size:22px; }
+      .strip{ width:90px; }
+      .film{ left:90px; right:90px; }
+    }
+
+    @media (max-width:560px){
+      .ticket{ flex-direction:column; border-radius:10px; width:100%; }
+      .strip{ width:100%; height:60px; writing-mode:horizontal-tb; transform:none; justify-content:flex-start; padding-left:16px; }
+      .strip.right{ order:3; justify-content:center; padding:10px; }
+      .center{ order:2; padding:12px; }
+      .film{ left:12px; right:12px; }
+      .inner{ width:100%; padding:16px; }
+      .info{ grid-template-columns:1fr; }
+      .info-full{ flex-direction:column; gap:8px; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticket-wrap">
+    <div class="ticket">
+
+      <!-- LEFT brand strip -->
+      <div class="strip left">
+        FLICKER
+      </div>
+
+      <!-- center area -->
+      <div class="center">
+        <div class="film top" aria-hidden="true"></div>
+
+        <div class="inner">
+          <div class="brand-row">
+            <img src="images/brand-logo.png" alt="brand" class="logo" onerror="this.style.display='none'">
+            <h1 class="title" id="ticketTitle">Movie Ticket</h1>
+          </div>
+
+          <div class="info">
+            <div class="cell"><span class="label">Theater:</span><span id="theatre">Theatre X</span></div>
+            <div class="cell"><span class="label">Row:</span><span id="row">A</span></div>
+
+            <div class="cell"><span class="label">Seat:</span><span id="seat">1</span></div>
+            <div class="cell"><span class="label">Date:</span><span id="date">DD-MM-YYYY</span></div>
+          </div>
+
+          <div class="info-full" style="margin-top:18px;">
+            <div><span class="label">Time:</span><span id="time">00:00</span></div>
+            <div><small style="color:#777">Booking ID: <span id="bookingId">—</span></small></div>
+          </div>
+        </div>
+
+        <div class="film bottom" aria-hidden="true"></div>
+      </div>
+
+      <!-- RIGHT barcode strip -->
+      <div class="strip right">
+        <img src="images/barcode.png" alt="barcode" class="barcode" onerror="this.style.display='none'">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="download">
+    <button id="downloadBtn">Download Ticket</button>
+  </div>
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    // Fill ticket data from localStorage (fall back values included)
+    const movieName = localStorage.getItem('movieName') || localStorage.getItem('selectedMovie') || 'Movie';
+    const theatre   = localStorage.getItem('theatre') || localStorage.getItem('selectedTheatre') || 'Theatre X';
+    const date      = localStorage.getItem('date') || localStorage.getItem('selectedDate') || 'DD-MM-YYYY';
+    const time      = localStorage.getItem('time') || localStorage.getItem('selectedTime') || '00:00';
+    const seat      = localStorage.getItem('seat') || localStorage.getItem('selectedSeat') || 'A1';
+    const bookingId = localStorage.getItem('bookingId') || '';
+
+    // extract row/seat if seat stored like "A12" or "A, A2"
+    let row = '';
+    let seatNumber = seat;
+    if (typeof seat === 'string') {
+      const cleaned = seat.split(/[,; ]+/)[0]; // first entry
+      row = cleaned.replace(/[0-9]/g, '') || 'A';
+      seatNumber = cleaned.replace(/\D/g, '') || cleaned;
+    }
+
+    document.getElementById('ticketTitle').innerText = movieName + ' Ticket';
+    document.getElementById('theatre').innerText = theatre;
+    document.getElementById('date').innerText = date;
+    document.getElementById('time').innerText = time;
+    document.getElementById('seat').innerText = seatNumber;
+    document.getElementById('row').innerText = row;
+    document.getElementById('bookingId').innerText = bookingId || '—';
+
+    // download as image
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      // temporarily remove focus outline / buttons if any
+      const ticket = document.querySelector('.ticket');
+      html2canvas(ticket, { scale: 2 }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = (movieName ? movieName.replace(/\s+/g,'-') : 'ticket') + '-flicker.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  </script>
+</body>
+</html>

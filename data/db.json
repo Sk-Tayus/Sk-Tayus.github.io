@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "eca8",
+      "fullName": "Tayus",
+      "email": "tayus@gmail.com",
+      "phone": "9877253684",
+      "password": "abc"
+    },
+    {
+      "id": "7fd2",
+      "fullName": "Jimmy",
+      "email": "jimmy123@gmail.com",
+      "phone": "1234567890",
+      "password": "qwerty"
+    },
+    {
+      "id": "0978",
+      "fullName": "Vicky Chor",
+      "email": "vicky.chor@gmail.com",
+      "phone": "1234567890",
+      "password": "qwklmc"
+    }
+  ]
+}

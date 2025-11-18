@@ -1,0 +1,199 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      width: 100%;
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h2 {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    header span {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .time-slot {
+      background: #0fa958;
+      color: #fff;
+      padding: 6px 15px;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 20px;
+      padding-bottom: 120px; /* space for pay bar */
+    }
+
+    .screen {
+      background-color: #ddd;
+      height: 60px;
+      width: 80%;
+      margin: 30px auto;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 60px;
+      font-weight: 500;
+      color: #333;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .section {
+      width: 100%;
+      margin: 30px auto;
+    }
+
+    .section h3 {
+      text-align: left;
+      margin: 10px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 5px 0;
+    }
+
+    .seat {
+      border: 2px solid #999;
+      height: 28px;
+      width: 28px;
+      margin: 4px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .seat.available {
+      border-color: #0fa958;
+    }
+
+    .seat.selected {
+      background-color: #0fa958;
+      border-color: #0fa958;
+    }
+
+    .seat.sold {
+      background-color: #ccc;
+      border-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .seat.bestseller {
+      border-color: #f2b01e;
+    }
+
+    .recliner-seat {
+      height: 35px;
+      width: 35px;
+      border-radius: 8px;
+    }
+
+    .labels {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 14px;
+      margin-top: 15px;
+      margin-bottom: 80px;
+    }
+
+    .label-box {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .label-color {
+      height: 15px;
+      width: 15px;
+      border-radius: 3px;
+    }
+
+    .bestseller-box .label-color {
+      background-color: #f2b01e;
+    }
+
+    .available-box .label-color {
+      border: 2px solid #0fa958;
+    }
+
+    .selected-box .label-color {
+      background-color: #0fa958;
+    }
+
+    .sold-box .label-color {
+      background-color: #ccc;
+    }
+
+    .pay-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .pay-bar span {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .pay-btn {
+      background-color: #e53935;
+      color: #fff;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pay-btn:hover {
+      background-color: #c62828;
+    }
+
+    .note {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin-top: 10px;
+    }

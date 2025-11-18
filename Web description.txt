@@ -1,0 +1,51 @@
+logo class for logo image and name
+seach class for search bar
+menu-toggle for horizontal 3 line bar for responsiveness
+bar class for 3 lines
+menu class contains nav links
+
+carousel class for carousel ⚠️to be updated
+genre-title for the title of cards
+carousel-container for genre cards
+genre-card for the cards
+arrow-right and arrow-left for the toggle 
+banner-wrapper for the behind of image to cover full widht
+banner-image for the banner image
+
+movies class contains list of movies
+movie class for a particular movie
+
+footer-container,footer-section,social-icons for the footer
+
+
+
+
+
+
+
+How to run the website:
+
+npx json-server --watch data/db.json --port 3000
+then open with live server
+
+
+
+📝To-do's
+1. add a profile icon✅ and dynamic log in log out❌
+2. use authentication api's for sign in sign up (optional)
+3. ✅add movie api which show movie banners
+4. ✅add a default image not found to avoid clashes in image
+5. ✅after clicking on the genre filter out movies on that genre
+6. add a main carousel containing scrollable effect
+7. add cursor effect on hovering movie and on clicking it will go to movie-details page
+8. make json file for 18 harcoded movies of movies.html and fetch it in theatres.html
+
+
+⦁ Food and Merchandise.html
+Implement the JavaScript logic for the "Add to Cart" functionality.
+Create a cart section where users can view the items they have added.
+Add a "Confirm" button that proceeds to the payment page.
+
+
+integrate the ticket button in payment page and show the deatils on it
+convert all code components in react app

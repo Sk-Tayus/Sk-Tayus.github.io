@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logosvg.svg">
+  <link rel="stylesheet" href="signup.css">
+  <title>Sign Up - Flicker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Sign Up</h1>
+    <form id="signupForm">
+      <div class="input-box">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" required>
+      </div>
+      <div class="input-box">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-box">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+      </div>
+      <div class="input-box password-box">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Create a password" required>
+        <i class="fa-solid fa-eye-slash eye-icon" id="signupEye" onclick="togglePassword('password','signupEye')"></i>
+      </div>
+      <div class="input-box password-box">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+        <i class="fa-solid fa-eye-slash eye-icon" id="confirmEye" onclick="togglePassword('confirmPassword','confirmEye')"></i>
+      </div>
+      <button class="btn" type="submit">Sign Up</button>
+    </form>
+    <div class="link">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <script>
+  // Eye toggle
+  function togglePassword(inputId, eyeId) {
+    const input = document.getElementById(inputId);
+    const eye = document.getElementById(eyeId);
+    if (input.type === "password") {
+      input.type = "text";
+      eye.classList.replace("fa-eye-slash","fa-eye");
+    } else {
+      input.type = "password";
+      eye.classList.replace("fa-eye","fa-eye-slash");
+    }
+  }
+
+  // Show message
+  function showMessage(text, type) {
+    let msg = document.createElement("div");
+    msg.className = `message-card ${type}`;
+    msg.innerText = text;
+    document.body.appendChild(msg);
+    setTimeout(() => msg.classList.add("show"), 50);
+    setTimeout(() => {
+      msg.classList.remove("show");
+      setTimeout(() => document.body.removeChild(msg), 500);
+    }, 3000);
+  }
+
+  // Signup logic using JSON server
+const signupForm = document.getElementById("signupForm");
+signupForm.addEventListener("submit", async function(e){
+  e.preventDefault();
+  const fullName = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if(password !== confirmPassword){
+    showMessage("Passwords do not match!", "error");
+    return;
+  }
+
+  try {
+    // Check if user already exists
+    const res = await fetch(`http://localhost:3000/users?email=${email}`);
+
+    // If server not reachable
+    if (!res.ok) {
+      throw new Error("Server not responding");
+    }
+
+    const existingUsers = await res.json();
+    if(existingUsers.length > 0){
+      showMessage("User already exists!", "error");
+      return;
+    }
+
+    // Create new user
+    const newUser = { fullName, email, phone, password };
+
+    const postRes = await fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(newUser)
+    });
+
+    // Handle if POST fails due to server issue
+    if (!postRes.ok) {
+      throw new Error("Unable to create user");
+    }
+
+    showMessage("Signup successful! Redirecting...", "success");
+    setTimeout(() => { window.location.href = "login.html"; }, 1500);
+  } 
+  catch (error) {
+    showMessage("⚠️ Please start the server!", "error");
+    console.error("Server error:", error);
+  }
+});
+
+</script>
+
+</body>
+</html>

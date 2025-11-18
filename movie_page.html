@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flicker - Movie Details</title>
+  <link rel="icon" type="image/x-icon" href="images/4831192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="FullResponsiveNavbar.css">
+<link rel="stylesheet" href="movie_page.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="footer.css">
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+   <header>
+    <a href="index.html" class="logo">
+      <img src="images/brand-logo.png" alt="Brand Logo" class="logo-image">
+    </a>
+
+    <!-- Search -->
+    <form class="search">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="search" placeholder="Search movies..." />
+      <button>Search</button>
+    </form>
+
+    <!-- Navbar -->
+    <nav>
+      <button class="menu-toggle" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <ul class="menu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about-us.html">About</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+        <li><button class="auth" onclick="window.location.href='login.html'">Login</button></li>
+        <li><button class="auth" onclick="window.location.href='signup.html'">Sign Up</button></li>
+
+      </ul>
+    </nav>
+
+   <div class="user-profile-container" id="userProfileContainer">
+  <div class="user-profile-icon" id="userProfileIcon"></div>
+  <div class="user-dropdown" id="userDropdown">
+    <div class="user-header">
+      <img src="images/Sample_User_Icon.png" class="user-avatar" id="userAvatar" alt="">
+      <div class="user-info">
+        <span class="user-name" id="userName">User</span>
+        <span class="user-email" id="userEmail">user@email.com</span>
+      </div>
+    </div>
+    <ul class="user-menu">
+      <li><i class="fa fa-user"></i>Profile</li>
+      <li><i class="fa fa-cog"></i>Settings</li>
+      <li onclick="userLogout()"><i class="fa fa-sign-out"></i>Logout</li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+  </header>
+
+    <main>
+
+    <!-- Movie Trailer and Details Box -->
+        <div class="movie_card">
+            <div class="trailer">
+                <iframe width="400" height="200" src="https://www.youtube.com/embed/p7eE_dn9u4k?si=1xm1ljuL-mgb_4Dr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     
+            </div>
+
+            <div class="details">
+            <div class="text">
+                <h1>Loading...</h1>
+            </div>
+
+            <div class="main-rating">
+                ⭐ <span>0/0</span> <small>(580k Views)</small>
+            </div>
+
+            <div class="tags">
+                <span>Loading...</span>
+                <span>Loading...</span>
+            </div>
+
+            <div class="info">
+                <span>Loading...</span> • 
+                <span>Loading...</span> • 
+                <span>Loading...</span> • 
+                <span>Loading...</span>
+            </div>
+
+            <div class="book">
+            <p><a href="#" style="text-decoration: none;">Book Tickets</a></p>
+            </div>
+
+    </div>
+    </div>
+
+
+    <!-- About The Movie -->
+
+    <div class="about">
+        <h2>About The Movie</h2>
+        
+        <p>Loading...</p>
+        <p>Loading...</p>
+        <p class="para_in_abt">Loading...</p>
+        <p class="para_in_abt">Loading...</p>
+    </div>
+    <hr class="break">
+
+    <!-- Top Reviews -->
+    <div class="reviews">
+        <h2>Top Reviews</h2>
+        
+        <!-- Reviews -->
+    <div class="reviews-container">
+
+        <!-- Review Card 1 -->
+        <div class="review-card">
+            <div class="user-info">
+                <div class="user-img"></div>
+                <div class="user-details">
+                    <strong>User-694862</strong>
+                    <span class="booked-on">Booked on <b style="color:red;">Flicker</b></span>
+                </div>
+                <div class="rating">⭐ 10/10</div>
+            </div>
+            <div class="review-tags">#SuperDirection #GreatActing #WowMusic</div>
+            <div class="review-text">Very nice movie...</div>
+            <div class="review-footer">
+                <div>5 Days ago</div>
+            </div>
+        </div>
+
+        <!-- Review Card 2 -->
+        <div class="review-card">
+            <div class="user-info">
+                <div class="user-img"></div>
+                <div class="user-details">
+                    <strong>User-478592</strong>
+                    <span class="booked-on">Booked on <b style="color:red;">Flicker</b></span>
+                </div>
+                <div class="rating">⭐ 10/10</div>
+            </div>
+            <div class="review-tags">#WowMusic #Inspiring #Wellmade</div>
+            <div class="review-text">
+                Great movie... 
+                Loved it...
+            </div>
+            <div class="review-footer">
+                <div>12 Days ago</div>
+            </div>
+        </div>
+
+
+        <!-- Review Card 2 -->
+        <div class="review-card">
+            <div class="user-info">
+                <div class="user-img"></div>
+                <div class="user-details">
+                    <strong>User-789546</strong>
+                    <span class="booked-on">Booked on <b style="color:red;">Flicker</b></span>
+                </div>
+                <div class="rating">⭐ 10/10</div>
+            </div>
+            <div class="review-tags">#WowMusic #Inspiring #Wellmade</div>
+            <div class="review-text">
+                Such a beautiful film..
+                I recommend it to everyone..
+            </div>
+            <div class="review-footer">
+                <div>18 Days ago</div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    <hr class="r">
+    </main>
+
+
+    <footer>
+        <!-- Footer -->
+    <div class="footer-container">
+      
+      <!-- Company Info -->
+      <div class="footer-section">
+        <h3>Flicker Movies</h3>
+        <p>
+          Step into the world of movies – only on Flicker 🎬<br>
+          Discover blockbusters, classics, and hidden gems all in one place.
+        </p>
+      </div>
+
+      <!-- Products / Categories -->
+      <div class="footer-section">
+        <h3>Movies</h3>
+        <a href="#">Now Showing</a><br>
+        <a href="#">Coming Soon</a><br>
+        <a href="#">Top Rated</a><br>
+        <a href="#">Special Events</a>
+      </div>
+
+ <!-- Useful Links -->
+      <div class="footer-section">
+        <h3>Useful Links</h3>
+        <a href="#">Your Account</a><br>
+        <a href="#">Book Tickets</a><br>
+        <a href="#">Offers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p><i class="fas fa-home"></i> New Delhi, India</p>
+        <p><i class="fas fa-envelope"></i> support@flicker.com</p>
+        <p><i class="fas fa-phone"></i> ‪+91 9876543210‬</p>
+        <p><i class="fas fa-print"></i> ‪+91 1234567890‬</p>
+      </div>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-google"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      © 2025 Flicker Movies | All Rights Reserved
+    </div>
+
+    </footer>
+    <script src="https://kit.fontawesome.com/a6ac84bd84.js" crossorigin="anonymous"></script>
+    <script src="navbar.js"></script>
+    <script src="movie_page.js"></script>
+
+</body>
+</html>

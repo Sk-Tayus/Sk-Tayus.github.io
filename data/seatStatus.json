@@ -1,0 +1,106 @@
+[
+  {
+    "title": "WAR 2",
+    "runtime": "N/A",
+    "viewerAge": "UA 16+",
+    "genres": ["Action", "Thriller"],
+    "theatres": [
+      {
+        "name": "PVR: Mohali Walk",
+        "shows": {
+          "10:30 AM": "available",
+          "01:45 PM": "filling",
+          "05:00 PM": "almost",
+          "08:15 PM": "available",
+          "11:30 PM": "sold"
+        }
+      },
+      {
+        "name": "Cinepolis: Bestech Square, Mohali",
+        "shows": {
+          "10:30 AM": "available",
+          "01:45 PM": "filling",
+          "05:00 PM": "almost",
+          "08:15 PM": "available",
+          "11:30 PM": "sold"
+        }
+      },
+      {
+        "name": "PVR: Centra Chandigarh",
+        "shows": {
+          "10:30 AM": "available",
+          "01:45 PM": "almost",
+          "05:00 PM": "sold",
+          "08:15 PM": "filling",
+          "11:30 PM": "available"
+        }
+      },
+      {
+        "name": "INOX: Zirakpur",
+        "shows": {
+          "10:30 AM": "filling",
+          "01:45 PM": "available",
+          "05:00 PM": "available",
+          "08:15 PM": "available",
+          "11:30 PM": "almost"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Mahavtar Narsimha",
+    "runtime": "N/A",
+    "viewerAge": "UA 13+",
+    "genres": ["Thriller"],
+    "theatres": [
+      {
+        "name": "PVR: Mohali Walk",
+        "shows": {
+          "10:30 AM": "filling",
+          "01:45 PM": "available",
+          "05:00 PM": "almost",
+          "08:15 PM": "sold",
+          "11:30 PM": "available"
+        }
+      },
+      {
+        "name": "Cinepolis: Bestech Square, Mohali",
+        "shows": {
+          "10:30 AM": "available",
+          "01:45 PM": "available",
+          "05:00 PM": "almost",
+          "08:15 PM": "filling",
+          "11:30 PM": "sold"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Ateez World",
+    "runtime": "2h 40m",
+    "viewerAge": "UA 13+",
+    "genres": ["Romance", "Comedy", "Crime"],
+    "theatres": [
+      {
+        "name": "PVR: Mohali Walk",
+        "shows": {
+          "10:30 AM": "available",
+          "01:45 PM": "filling",
+          "05:00 PM": "almost",
+          "08:15 PM": "available",
+          "11:30 PM": "sold"
+        }
+      },
+      {
+        "name": "Cinepolis: Bestech Square, Mohali",
+        "shows": {
+          "10:30 AM": "available",
+          "01:45 PM": "filling",
+          "05:00 PM": "almost",
+          "08:15 PM": "available",
+          "11:30 PM": "sold"
+        }
+      }
+    ]
+  }
+]

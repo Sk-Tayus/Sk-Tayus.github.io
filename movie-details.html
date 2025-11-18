@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Flicker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Merriweather', sans-serif;
+      background: #000814;
+      color: white;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background: #001D3D;
+    }
+    header .logo { font-size: 24px; font-weight: bold; color: #FFC300; }
+    header .search input {
+      padding: 6px;
+      border: none;
+      border-radius: 4px;
+    }
+    header .search button {
+      padding: 6px 12px;
+      margin-left: 6px;
+      background: #FFC300;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .movie_card {
+      display: flex;
+      padding: 40px;
+      gap: 40px;
+      background: linear-gradient(rgba(10, 15, 31, 0.9), rgba(10, 15, 31, 0.9));
+    }
+    .trailer iframe {
+      border-radius: 10px;
+    }
+    .details h1 { font-size: 28px; margin-bottom: 10px; }
+    .main-rating { color: #FFC300; margin-bottom: 10px; }
+    .tags span {
+      background: #001D3D;
+      padding: 5px 10px;
+      margin-right: 5px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .info { margin: 15px 0; color: #ccc; }
+    .book {
+      background: #FFC300;
+      color: #001D3D;
+      padding: 12px;
+      border-radius: 10px;
+      width: 180px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .book:hover { background: #FFD60A; }
+    .about, .reviews, .cast { padding: 40px; }
+    h2 { color: #FFC300; margin-bottom: 20px; }
+    .reviews-container, .cast-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .review-card {
+      background: #001D3D;
+      border-radius: 10px;
+      padding: 15px;
+      width: 300px;
+    }
+    .review-text { font-size: 14px; color: #ddd; }
+    .cast-card {
+      background: #001D3D;
+      border-radius: 10px;
+      padding: 10px;
+      width: 150px;
+      text-align: center;
+    }
+    .cast-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    footer {
+      background: #001D3D;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🎬 Flicker Movies</div>
+    <form class="search" id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search movies...">
+      <button type="submit">Search</button>
+    </form>
+  </header>
+
+  <main>
+    <!-- Movie Card -->
+    <div class="movie_card">
+      <div class="trailer">
+        <iframe id="movie-trailer" width="400" height="250" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="details">
+        <h1 id="movie-title">Loading...</h1>
+        <div class="main-rating">⭐ <span id="movie-rating"></span></div>
+        <div class="tags" id="movie-genres"></div>
+        <div class="info" id="movie-info"></div>
+        <div class="book">Book Tickets</div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="about">
+      <h2>About The Movie</h2>
+      <p id="movie-overview"></p>
+    </div>
+
+    <!-- Reviews -->
+    <div class="reviews">
+      <h2>Top Reviews</h2>
+      <div class="reviews-container" id="reviews"></div>
+    </div>
+
+    <!-- Cast -->
+    <div class="cast">
+      <h2>Cast & Crew</h2>
+      <div class="cast-container" id="cast"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Flicker Movies | All Rights Reserved</p>
+  </footer>
+
+<script>
+  const API_KEY = "964ed32cd438a6d4862e4679d3cd98f9"; // Replace with your TMDb key
+  const BASE_URL = "https://api.themoviedb.org/3";
+  const IMG_URL = "https://image.tmdb.org/t/p/w200";
+
+  async function getMovieDetails(movieId) {
+    const res = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&append_to_response=credits,reviews,videos`);
+    const data = await res.json();
+
+    // Title, Rating, Genres, Info
+    document.getElementById("movie-title").innerText = data.title;
+    document.getElementById("movie-rating").innerText = `${data.vote_average.toFixed(1)}/10 (${data.vote_count} votes)`;
+    document.getElementById("movie-genres").innerHTML = data.genres.map(g => `<span>${g.name}</span>`).join("");
+    document.getElementById("movie-info").innerText = `${data.runtime} min • ${data.release_date}`;
+    document.getElementById("movie-overview").innerText = data.overview;
+
+    // Trailer
+    const trailer = data.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube");
+    document.getElementById("movie-trailer").src = trailer ? `https://www.youtube.com/embed/${trailer.key}` : "";
+
+    // Cast
+    let castHTML = "";
+    data.credits.cast.slice(0, 6).forEach(actor => {
+      castHTML += `
+        <div class="cast-card">
+          <img src="${actor.profile_path ? IMG_URL + actor.profile_path : 'https://via.placeholder.com/150'}" alt="${actor.name}">
+          <p class="name">${actor.name}</p>
+          <p class="role">${actor.character}</p>
+        </div>`;
+    });
+    document.getElementById("cast").innerHTML = castHTML;
+
+    // Reviews
+    let reviewsHTML = "";
+    data.reviews.results.slice(0, 3).forEach(review => {
+      reviewsHTML += `
+        <div class="review-card">
+          <strong>${review.author}</strong>
+          <div class="review-text">${review.content.substring(0, 150)}...</div>
+        </div>`;
+    });
+    document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet.</p>";
+  }
+
+  // Default Movie (Oppenheimer ID = 872585)
+  getMovieDetails(872585);
+
+  // Search Functionality
+  document.getElementById("searchForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const query = document.getElementById("searchInput").value;
+    if (!query) return;
+
+    const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
+    const data = await res.json();
+    if (data.results.length > 0) {
+      getMovieDetails(data.results[0].id);
+    } else {
+      alert("Movie not found!");
+    }
+  });
+</script>
+
+</body>
+</html>
