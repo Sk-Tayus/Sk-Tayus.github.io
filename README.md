@@ -1,1 +1,0 @@
-# Sk-Tayus.github.io
