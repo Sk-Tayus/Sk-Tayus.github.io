@@ -1,1 +1,422 @@
-s
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Movie Food Order</title>
+
+<style>
+  :root {
+    --black: #000814;
+    --darkBlue: #001d3d;
+    --lightBlue: #003566;
+    --yellow: #ffc300;
+    --fadedYellow: #ffd60a;
+    --white: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(145deg, var(--darkBlue), var(--black));
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--lightBlue);
+    padding: 18px 25px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 8px 18px;
+    border-radius: 18px;
+    background: var(--lightBlue);
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .tab.active {
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: bold;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--darkBlue);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.03);
+  }
+
+  .card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .card h3 {
+    margin: 12px 0 5px;
+    font-size: 17px;
+  }
+
+  .size-select {
+    margin-top: 6px;
+    background: var(--lightBlue);
+    color: var(--white);
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  .price-add {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .add-btn {
+    padding: 6px 12px;
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+
+  .cart {
+    background: var(--darkBlue);
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .cart-item {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .remove-btn {
+    color: var(--yellow);
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--yellow);
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="header">🍿 Flicker - Order Food & merch</div>
+
+<div class="container">
+
+  <div>
+    <div class="tabs" id="tabs"></div>
+    <div class="items" id="items"></div>
+  </div>
+
+  <div class="cart">
+    <h2>Your Cart</h2>
+<div id="cartItems">No items added.</div>
+
+<!-- ⭐ TOTAL PRICE BOX -->
+<div id="cartTotal" style="
+    margin-top:12px;
+    font-size:18px;
+    font-weight:bold;
+    text-align:right;
+    color:#ffd60a;">
+    Total: ₹0
+</div>
+
+<button class="checkout-btn" onclick="checkout()">Checkout</button>
+
+  </div>
+</div>
+
+<script>
+
+// Categories
+const categories = ["All", "Combos", "Popcorn", "Drinks", "Snacks", "Merchandise"];
+
+// Data
+const itemsData = {
+  All: [
+    { name: "Combo 1 (Salted)", price: 720, img: "https://i.imgur.com/9A9ZQ0T.png", type: "Combos" },
+    { name: "Combo 2 (Salted)", price: 1140, img: "https://i.imgur.com/9piBY3F.png", type: "Combos" },
+    { name: "Mega Combo (Popcorn + Pepsi)", price: 890, img: "https://i.imgur.com/n9f0SxV.jpeg", type: "Combos" },
+
+    { name: "Medium Salted Popcorn", price: 515, img: "https://i.imgur.com/4r8j1Za.png", type: "Popcorn" },
+    { name: "Regular Salted Popcorn", price: 415, img: "https://i.imgur.com/JGLY3dH.png", type: "Popcorn" },
+    { name: "Cheese Popcorn", price: 650, img: "https://i.imgur.com/Bnpa4BB.jpeg", type: "Popcorn" },
+
+    { name: "Medium Pepsi", price: 390, img: "https://i.imgur.com/1fZRzTW.png", type: "Drinks" },
+    { name: "Coke 500ml", price: 420, img: "https://i.imgur.com/8O1SvuF.jpeg", type: "Drinks" },
+    { name: "Cold Coffee", price: 199, img: "https://i.imgur.com/4tlwCAr.jpeg", type: "Drinks" },
+
+    { name: "Paneer Sandwich", price: 330, img: "https://i.imgur.com/NMPW06X.png", type: "Snacks" },
+    { name: "Veg Burger", price: 260, img: "https://i.imgur.com/jy2ZZmW.jpeg", type: "Snacks" },
+    { name: "French Fries", price: 150, img: "https://i.imgur.com/PGTiH6f.jpeg", type: "Snacks" },
+
+    { name: "Marvel T-Shirt", price: 499, img: "https://i.imgur.com/q7eZkXI.jpeg", type: "Merchandise" },
+    { name: "Avengers Keychain", price: 199, img: "https://i.imgur.com/jPpD0C7.jpeg", type: "Merchandise" },
+    { name: "Batman Cap", price: 399, img: "https://i.imgur.com/4fp1uKv.jpeg", type: "Merchandise" }
+  ]
+};
+
+// Auto-create category datasets
+categories.forEach(cat => {
+  if (cat !== "All") itemsData[cat] = itemsData.All.filter(item => item.type === cat);
+});
+
+// Render Tabs
+const tabsContainer = document.getElementById("tabs");
+
+categories.forEach((cat, i) => {
+  tabsContainer.innerHTML += `
+    <div class="tab ${i === 0 ? "active" : ""}" onclick="switchTab('${cat}', this)">
+      ${cat}
+    </div>
+  `;
+});
+
+// Render Items
+function renderItems(category = "All") {
+  const container = document.getElementById("items");
+  container.innerHTML = "";
+
+  itemsData[category].forEach((item, index) => {
+    let sizeHTML = "";
+
+    if (item.type === "Merchandise") {
+      sizeHTML = `
+        <select class="size-select" id="size-${category}-${index}">
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+          <option>XL</option>
+        </select>
+      `;
+    }
+
+    container.innerHTML += `
+      <div class="card">
+        <img src="${item.img}">
+        <h3>${item.name}</h3>
+
+        ${sizeHTML}
+
+        <div class="price-add">
+          <span>₹${item.price}</span>
+          <button class="add-btn" onclick="addToCart('${category}', ${index})">Add</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// Switch Tabs
+function switchTab(category, tab) {
+  document.querySelector(".tab.active").classList.remove("active");
+  tab.classList.add("active");
+  renderItems(category);
+}
+
+// CART LOGIC
+let cart = [];
+
+function addToCart(category, index) {
+  const item = { ...itemsData[category][index] };
+
+  if (item.type === "Merchandise") {
+    const size = document.getElementById(size-`${category}`-`${index}`).value;
+    item.size = size;
+  }
+
+  const existing = cart.find(i => i.name === item.name && (i.size ? i.size === item.size : true));
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    item.qty = 1;
+    cart.push(item);
+  }
+
+  renderCart();
+}
+
+function renderCart() {
+  const cartBox = document.getElementById("cartItems");
+
+  if (cart.length === 0) {
+    cartBox.innerHTML = "No items added.";
+    return;
+  }
+
+  cartBox.innerHTML = cart
+    .map((item, idx) => `
+      <div class="cart-item">
+        <span>${item.name} ${item.size ? "(" + item.size + ")" : ""}</span>
+        <span>₹${item.price} × ${item.qty}
+          <span class="remove-btn" onclick="removeItem(${idx})">Remove</span>
+        </span>
+      </div>
+    `)
+    .join("");
+}
+
+function removeItem(i) {
+  cart.splice(i, 1);
+  renderCart();
+}
+
+function checkout() {
+  if (cart.length === 0) return alert("Your cart is empty!");
+
+  let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  alert("Checkout Successful!\nTotal: ₹" + total);
+}
+
+renderItems();
+
+
+
+//integratin logic
+/* --------------------------------------------
+   LOAD TICKET SUMMARY (FROM SEAT SELECTION)
+--------------------------------------------- */
+
+const ticketData = JSON.parse(localStorage.getItem("finalBookingSummary"));
+
+let ticketTotal = ticketData ? ticketData.seatTotal : 0;
+
+// Show ticket price inside cart
+function showTicketSummary() {
+  const cartBox = document.getElementById("cartItems");
+
+  if (!ticketData) return;
+
+  const ticketHTML = `
+    <div class="cart-item" style="border-bottom:1px solid #444; padding-bottom:8px; margin-bottom:8px;">
+      <strong>🎟 Tickets</strong>
+      <span>₹${ticketTotal}</span>
+    </div>
+  `;
+
+  cartBox.innerHTML = ticketHTML + cartBox.innerHTML;
+}
+
+/* ------------------------------------------------
+   UPDATE CART TOTAL → TICKET TOTAL + FOOD TOTAL
+------------------------------------------------- */
+
+function calculateGrandTotal() {
+  const foodTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  return foodTotal + ticketTotal;
+}
+
+//tiral
+function updateTotalBox() {
+  const totalBox = document.getElementById("cartTotal");
+  totalBox.innerHTML = "Total: ₹" + calculateGrandTotal();
+}
+
+
+/* ------------------------------------------------
+   OVERRIDE checkout() → SAVE FINAL ORDER
+------------------------------------------------- */
+
+function checkout() {
+  if (cart.length === 0) {
+    if (confirm("No food items added. Continue to payment?"))
+      goToPayment();
+    return;
+  }
+
+  goToPayment();
+}
+
+function goToPayment() {
+  const finalOrder = {
+    movie: ticketData.movie,
+    theatre: ticketData.theatre,
+    date: ticketData.date,
+    time: ticketData.time,
+    seats: ticketData.seats,
+    seatTotal: ticketTotal,
+    foodItems: cart,
+    foodTotal: cart.reduce((sum, item) => sum + item.price * item.qty, 0),
+    grandTotal: calculateGrandTotal()
+  };
+
+  localStorage.setItem("finalOrderSummary", JSON.stringify(finalOrder));
+
+  window.location.href = "payment_gateway.html";
+}
+
+/* ------------------------------------------------
+   When cart updates → show ticket + food
+------------------------------------------------- */
+
+const originalRenderCart = renderCart;
+
+renderCart = function () {
+  originalRenderCart();
+  showTicketSummary();
+  updateTotalBox();   // ⭐ Update total whenever cart changes tiral
+};
+
+
+showTicketSummary();
+//tiral
+updateTotalBox();
+
+
+</script>
+
+</body>
+</html>
