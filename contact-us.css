@@ -1,0 +1,208 @@
+ /* ==== GLOBAL ==== */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #000814, #001d3d, #003566);
+      color: #f9f9f9;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    h1, h2 {
+      margin: 0 0 15px;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* ==== HERO ==== */
+    .contact-hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    .contact-hero h1 {
+      font-size: 3.2rem;
+      color: #FFD60A;
+      margin-bottom: 20px;
+      text-shadow: 0px 0px 10px rgba(255, 214, 10, 0.7);
+    }
+
+    .contact-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #eaeaea;
+    }
+
+    /* ==== CONTACT SECTION ==== */
+    .contact-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    /* ==== CARD STYLE ==== */
+    .card {
+      background: rgba(0, 29, 61, 0.85);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(255, 195, 0, 0.4);
+    }
+
+    .card h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      color: #f1f1f1;
+    }
+
+    .card strong {
+      color: white;
+    }
+
+    /* ==== FORM ==== */
+    .contact-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #003566;
+      border-radius: 10px;
+      background: rgba(0, 8, 20, 0.8);
+      color: white;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: white;
+      background: rgba(0, 8, 20, 0.95);
+      outline: none;
+    }
+
+    .contact-form button {
+      background: linear-gradient(90deg, white, #FFD60A);
+      color: #000814;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 195, 0, 0.7);
+    }
+
+    /* ==== FOOTER ==== */
+    footer {
+      background: #001D3D;
+      text-align: center;
+      padding: 25px;
+      color: #e5e5e5;
+      margin-top: 80px;
+      border-top: 3px solid #FFC300;
+    }
+
+    footer {
+  background-color: var(--black);
+  color: #fff;
+  padding: 40px 20px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+  margin: 10px;
+}
+
+.footer-section h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #f1c40f;
+  text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.8;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: #f1c40f;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #aaa;
+}
+/* Social Icons */
+.social-icons {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 8px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background: var(--lightBlue);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: var(--fadedYellow);
+  color: #2c3e50;
+}

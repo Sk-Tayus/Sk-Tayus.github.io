@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI Payment | Flicker</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #001d3d;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: #003566;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    #qrBox {
+      margin: 20px 0;
+      padding: 15px;
+      background: #000;
+      border-radius: 12px;
+    }
+
+    #amountBox {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #ffd60a;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #ffc300;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🔆 Flicker UPI Payment</h2>
+
+  <div class="container">
+
+    <div id="amountBox">Amount: ₹0</div>
+
+    <div id="qrBox">
+      <img id="upiQR" src="" width="250">
+    </div>
+
+    <p>Scan the QR using any UPI app (GPay/PhonePe/Paytm).</p>
+
+    <button id="paidBtn">I Have Paid</button>
+
+  </div>
+
+  <script src="upi_payment.js"></script>
+
+</body>
+</html>

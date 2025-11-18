@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment - Movie Booking | Flicker</title>
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
+  <link rel="stylesheet" href="payment_gateway.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Movie Payment Gateway</h2>
+
+    <!-- 🧾 Booking Summary -->
+    <div class="summary">
+      <h3>Order Summary</h3>
+      <div class="row"><span>🎬 Movie:</span><span id="movieName">Loading...</span></div>
+      <div class="row"><span>🎭 Theatre:</span><span id="theatreName">Loading...</span></div>
+      <div class="row"><span>📅 Date:</span><span id="dateInfo">Loading...</span></div>
+      <div class="row"><span>🕒 Show Time:</span><span id="timeInfo">Loading...</span></div>
+      <div class="row"><span>🎟️ Tickets:</span><span id="ticketCount">Loading...</span></div>
+
+      <!-- ⭐ NEW ROWS -->
+      <div class="row"><span>🍔 Food Items:</span><span id="foodList">None</span></div>
+      <div class="row"><span>🥤 Food Total:</span><span id="foodTotal">₹0</span></div>
+
+      <div class="row total"><span>Total:</span><span id="totalAmount">₹0</span></div>
+    </div>
+
+
+    <!-- 💳 Payment Section -->
+        <!-- 💳 Payment Section -->
+    <div class="payment">
+      <h3>Choose Payment Method</h3>
+      <p>Pay easily and securely using PayPal</p>
+
+      <!-- PayPal Button -->
+      <div id="paypal-button-container"></div>
+
+      <hr style="margin: 25px 0; border: none; border-top: 1px dashed #ccc;">
+
+      <!-- 🆕 UPI PAYMENT BOX -->
+      <h4>Or Pay using UPI</h4>
+      <div class="upi-box">
+        <div class="upi-row">
+          <label for="upiName">Full Name</label>
+          <input type="text" id="upiName" placeholder="Enter your name">
+        </div>
+
+        <div class="upi-row">
+          <label for="upiId">UPI ID</label>
+          <input type="text" id="upiId" placeholder="example@upi">
+        </div>
+
+        <div class="upi-row">
+          <label for="upiPhone">Phone Number</label>
+          <input type="tel" id="upiPhone" placeholder="10-digit mobile number">
+        </div>
+
+        <button id="upiPayBtn">Pay via UPI</button>
+        <p class="upi-note">* This is a demo payment. You will be redirected to your ticket.</p>
+      </div>
+    </div>
+
+
+  <script src="payment_gateway.js"></script>
+
+
+</body>
+</html>

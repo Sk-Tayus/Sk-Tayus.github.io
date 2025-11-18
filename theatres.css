@@ -1,0 +1,455 @@
+:root {
+  --black: #000814;
+  --darkBlue: #001d3d;
+  --lightBlue: #003566;
+  --yellow: #ffc300;
+  --fadedYellow: #ffd60a;
+  --white: #fff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Merriweather", serif;
+}
+header {
+  background: #001d3d;
+  color: white;
+}
+
+.menu li a {
+  color: white;
+}
+
+body {
+  background-color: #f2f5f9;
+}
+
+.movie-booking-container {
+  margin-top: 20px;
+  background-color: white;
+  padding-top: 20px;
+  margin-top: 0px;
+}
+
+.movie-description a {
+  font-size: 32px;
+  line-height: 36px;
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  margin-left: 50px;
+}
+
+.movie-description a:hover {
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.movie-data {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 50px;
+}
+
+.movie-data .tag {
+  font-size: 12px;
+  color: rgb(80, 80, 80);
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-family: "Poppins", sans-serif;
+  display: inline-block;
+}
+
+/* date filter container for in a single line of dates and filter dont change this */
+.date-filter-container {
+  display: flex;
+  margin-top: 1rem;
+  /* background-color: red; */
+  border: 0.001rem solid grey;
+  box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* DATES  */
+.dates {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 80%;
+  height: auto;
+  display: flex;
+  gap: 10px;
+  margin-left: 50px;
+}
+
+.date {
+  width: 60px;
+  height: auto;
+  padding: 4px 0px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  background-color: #003566;
+  border: 2px solid red;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.date:hover {
+  background-color: var(--yellow);
+  color: var(--black);
+}
+
+/* Filters Container */
+.filters-container {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 10px;
+  margin: 32px 0 1rem;
+  width: 100%; 
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Filter Item */
+.filter-item {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: #fff;
+  transition: 0.3s ease;
+  flex: 1 1 auto; 
+  min-width: 120px; 
+  max-width: 250px; 
+}
+
+.filter-item:hover {
+  border-color: #d62828;
+}
+
+/* Label styling */
+.filter-item label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#filter-search {
+  flex: 2 1 200px; 
+  display: flex;
+  align-items: center;
+}
+
+#filter-search input {
+  flex: 1;
+  min-width: 60px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+#filter-search button {
+  flex: 0 0 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+#filter-search-icon {
+  background-color: white;
+  cursor: pointer;
+  border: none;
+}
+
+#price-range {
+  width: 140px;
+}
+
+#special-formats {
+  width: 170px;
+}
+
+#preferred-time {
+  width: 170px;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-bar i {
+  color: #d62828;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.dropdown-content label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdown-content input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+/* Large screens */
+@media (max-width: 1530px) {
+  .date-filter-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filters-container {
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .filters-container {
+    align-items: stretch;
+  }
+
+  .filter-item {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  #filter-search {
+    width: 100%;
+  }
+
+  #filter-search input,
+  #filter-search button {
+    width: 100%; /* stack input & button vertically */
+  }
+}
+
+/* SEAT STATUS ICONS  */
+/* Legend container */
+.seat-status {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  flex-wrap: wrap;
+  background-color: #f2f2f2; 
+  background-color: white; 
+  padding: 8px 12px;
+  border-radius: 6px;  
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+/* Common dot style */
+.seat-status .dot {
+  margin-left: 50px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Status colors */
+.seat-status .available {
+  background-color: rgb(152, 236, 131);
+}
+
+.seat-status .filling {
+  background-color: gold;
+}
+
+.seat-status .almost {
+  background-color: orangered;
+}
+.seat-status .sold {
+  background-color: rgb(188, 188, 188);
+}
+.rest-container-timings {
+  background-color: #f2f5f9;
+  padding-top: 10px;
+}
+
+
+/* THEATRES  */
+#first-theatre-card {
+  margin-top: 10px;
+}
+.theatre-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-family: "Poppins", sans-serif;
+  margin-left: 50px;
+}
+
+/* theatre info */
+
+.theatre-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #eaeaea;
+  /* light grey card background */
+  padding: 16px 20px;
+  margin-top: 20px;
+  /* space above/below */
+  border-radius: 8px;
+  max-width: 1400px;
+  /* center card, not full width */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* theatre info */
+.theatre-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theatre-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.theatre-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+}
+
+/* Showtimes */
+.showtimes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-left: 40px;
+  /* shift timings a little left */
+}
+
+.showtimes button {
+  border: 1px solid green;
+  /* background: white; */
+  color: #333;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.showtimes button:hover {
+  /* background-color: ; */
+  opacity: 0.6;
+  font-weight: 900;
+}
+
+.available {
+  background-color: rgb(152, 236, 131);
+}
+
+.fast-filling {
+  background-color: var(--yellow);
+}
+
+.sold-out {
+  background-color: rgb(188, 188, 188);
+}
+.almost-full {
+  background-color: #ff4500;
+}
+
+.like-btn {
+  font-size: 20px;
+  color: white; /* default grey */
+  cursor: pointer;
+  margin-right: 12px;
+  transition: color 0.3s ease;
+}
+
+.like-btn.liked {
+  color: #e74c3c; /* red heart when clicked */
+}
+
+
+
+
+/* changes  */
+.sold-out,
+.sold-out:disabled {
+  background-color: rgb(188, 188, 188);
+  color: white;
+  opacity: 0.7;
+  cursor: not-allowed !important; /* 🚫 default system red circle cursor */
+}
+
+
+
+
+
+.date.active {
+  background-color: var(--yellow);
+  color: var(--black);
+  border-radius: 10px;
+  transform: scale(1.05);
+  transition: 0.2s ease;
+}
+.date {
+  cursor: pointer;
+}
